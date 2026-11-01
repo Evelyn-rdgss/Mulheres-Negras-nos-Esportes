@@ -1,0 +1,981 @@
+:root {
+  --terracota: #b8390c;
+  --verde: #366e41;
+  --ambar: #d38015;
+  --marrom: #7e3310;
+  --escuro: #7e3310;
+  --noite: #2b1409;
+  --ouro: #f2c46d;
+  --creme: #fbf3e4;
+  --suave: #f6e3c3;
+  --texto: #2b1409;
+  --titulo: #b8390c;
+  --sub: #366e41;
+  --estrela2: #7cbf88;
+  --papel: #f0dcb4;
+  --papel-linha: rgba(184, 57, 12, 0.25);
+  --fita: rgba(211, 128, 21, 0.9);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Roboto", Arial, sans-serif;
+  background: var(--creme);
+  color: var(--texto);
+}
+
+.pagina {
+  max-width: 880px;
+  margin: 0 auto;
+  background: var(--creme);
+}
+/* evita barra de rolagem lateral quando as fotos passam da borda */
+body {
+  overflow-x: hidden;
+}
+
+h2 {
+  font-family: "Anton", Impact, sans-serif;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-size: 1.5rem;
+  margin: 22px 0 10px;
+  color: var(--titulo);
+}
+
+/* ---------- TOPO ---------- */
+.topo {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+  padding: 24px 34px 0;
+}
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.chip {
+  border: 2px solid var(--terracota);
+  color: var(--texto);
+  border-radius: 30px;
+  padding: 8px 16px;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.chip:nth-child(3n + 2) {
+  border-color: var(--verde);
+}
+.chip:nth-child(3n + 3) {
+  border-color: var(--ambar);
+}
+.linha {
+  font-size: 1.1rem;
+  text-transform: uppercase;
+  margin-top: 4px;
+  color: var(--titulo);
+  font-weight: 700;
+}
+.sub {
+  font-style: italic;
+  margin-bottom: 14px;
+  color: var(--sub);
+}
+.marco {
+  margin-bottom: 10px;
+}
+.texto-escuro {
+  font-size: 0.95rem;
+  line-height: 1.55;
+  color: var(--texto);
+}
+
+/* ---------- NOME GIGANTE ---------- */
+.nome-bloco {
+  --pad-nome: 34px;
+  position: relative;
+  margin-top: 26px;
+  padding: 0 var(--pad-nome);
+  background: var(--escuro);
+  min-height: 300px;
+}
+.nome {
+  font-family: "Anton", Impact, sans-serif;
+  font-weight: 400;
+  text-transform: uppercase;
+  line-height: 0.95;
+  font-size: clamp(2.6rem, 9vw, 5.5rem); /* valor provisório; o JS ajusta */
+  position: relative;
+  z-index: 2;
+  margin: 0 calc(var(--pad-nome) * -1);
+}
+.nome .primeiro,
+.nome .ultimo {
+  display: block;
+  padding: 0 var(--pad-nome);
+}
+/* primeiro nome: terracota sobre creme */
+.nome .primeiro {
+  background: var(--creme);
+  color: var(--terracota);
+  padding-bottom: 0.02em;
+}
+/* sobrenome: âmbar claro sobre marrom */
+.nome .ultimo {
+  color: var(--ouro);
+  padding-top: 0.07em;
+}
+.nome .txt {
+  display: block;
+  width: max-content;
+  white-space: nowrap;
+}
+
+.foto {
+  position: absolute;
+  right: 26px;
+  bottom: -70px;
+  width: 300px;
+  height: 380px;
+  object-fit: cover;
+  border-radius: 18px;
+  border: 5px solid var(--creme);
+  background: var(--suave);
+  z-index: 3;
+  transform: rotate(2deg);
+}
+/* Foto com fundo transparente (PNG recortado): sem moldura */
+.foto.recorte {
+  object-fit: contain;
+  object-position: bottom;
+  border: none;
+  border-radius: 0;
+  background: none;
+  transform: none;
+  width: 340px;
+  height: 440px;
+  bottom: -90px;
+}
+
+/* ---------- BASE ---------- */
+.base {
+  background: var(--escuro);
+  color: var(--creme);
+  /* faixa com as cores da paleta */
+  border-top: 8px solid var(--ambar);
+  border-image: linear-gradient(
+      to right,
+      var(--ambar) 0 25%,
+      var(--terracota) 25% 50%,
+      var(--verde) 50% 75%,
+      var(--noite) 75% 100%
+    )
+    1;
+  padding: 56px 34px 40px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) min(300px, 38%);
+  column-gap: 30px;
+  align-items: start;
+  /* quanto as fotos podem sair do bloco (só existe se sobrar margem na tela) */
+  --sai: clamp(0px, calc((100vw - 880px) / 2), 28px);
+}
+.base > :not(.galeria) {
+  grid-column: 1;
+}
+.base-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+}
+.col-base {
+  padding: 0 20px 0 0;
+}
+/* títulos sobre o marrom: âmbar claro */
+.col-base h2 {
+  margin-top: 0;
+  color: var(--ouro);
+}
+.col-base p {
+  line-height: 1.6;
+  font-size: 0.95rem;
+  text-align: justify;
+  color: var(--creme);
+}
+
+/* Destaque estilo revista: texto escuro sobre âmbar */
+.anedota {
+  position: relative;
+  background: var(--ambar);
+  color: var(--noite);
+  border-radius: 14px;
+  padding: 30px 24px 20px;
+  margin-top: 38px;
+}
+.anedota p {
+  font-family: "Playfair Display", Georgia, serif;
+  font-style: italic;
+  font-size: 1.15rem;
+  line-height: 1.5;
+}
+/* adesivo: creme sobre verde */
+.adesivo {
+  position: absolute;
+  top: -16px;
+  left: 20px;
+  background: var(--verde);
+  color: var(--creme);
+  font-family: "Anton", Impact, sans-serif;
+  text-transform: uppercase;
+  padding: 5px 14px;
+  border-radius: 6px;
+  transform: rotate(-3deg);
+  letter-spacing: 0.5px;
+}
+
+.pergunta {
+  margin-top: 34px;
+  border-top: 2px dashed rgba(242, 196, 109, 0.75);
+  padding-top: 20px;
+}
+.pergunta p {
+  font-family: "Anton", Impact, sans-serif;
+  text-transform: uppercase;
+  font-size: 1.4rem;
+  line-height: 1.2;
+  color: var(--ouro);
+}
+.pergunta small {
+  display: block;
+  margin-top: 8px;
+  line-height: 1.5;
+  color: var(--creme);
+}
+
+/* ---------- Galeria: colagem de fotos (abaixo da foto principal) ---------- */
+.galeria {
+  grid-column: 2;
+  grid-row: 1 / span 3;
+  /* a colagem vai até a borda do bloco e passa dela em --sai */
+  margin: 34px calc(-34px - var(--sai)) 0 0;
+}
+.galeria.apos-recorte {
+  margin-top: 54px;
+}
+.galeria[hidden],
+.colagem figure[hidden] {
+  display: none;
+}
+
+/* Área da colagem: sem fundo, as fotos ficam coladas direto no bloco e
+   atravessam a borda direita */
+.colagem {
+  position: relative;
+  aspect-ratio: 1 / 1.3;
+}
+.colagem.n1 {
+  aspect-ratio: 1 / 1.1;
+}
+.colagem.n2 {
+  aspect-ratio: 1 / 1.3;
+}
+.colagem.n3 {
+  aspect-ratio: 1 / 1.5;
+}
+.colagem.n4 {
+  aspect-ratio: 1 / 1.85;
+}
+
+/* Foto com moldura */
+.colagem figure {
+  position: absolute;
+  margin: 0;
+  background: var(--creme);
+  border: 5px solid var(--creme);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+}
+.colagem figure img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  object-position: center 20%;
+  background: var(--suave);
+}
+/* Polaroid: moldura branca com borda inferior larga e fita adesiva */
+.colagem figure.polaroid {
+  background: #fff;
+  border: none;
+  padding: 6px 6px 26px;
+}
+.colagem figure.polaroid img {
+  aspect-ratio: 1 / 1;
+}
+.colagem figure.polaroid::before {
+  content: "";
+  position: absolute;
+  top: -9px;
+  left: 50%;
+  width: 44%;
+  height: 18px;
+  transform: translateX(-50%) rotate(-3deg);
+  background: var(--fita);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+/* Enfeites */
+.colagem .deco {
+  position: absolute;
+  pointer-events: none;
+}
+/* Adesivos redondos com o ícone da modalidade */
+.deco-estrela {
+  width: 24%;
+  aspect-ratio: 1 / 1;
+  z-index: 6;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--creme);
+  border: 3px solid #fff;
+  box-shadow: 0 3px 9px rgba(0, 0, 0, 0.4);
+}
+.deco-estrela svg {
+  display: block;
+  width: 62%;
+  aspect-ratio: 1 / 1;
+  height: auto;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  overflow: visible;
+}
+.deco-estrela.amarela {
+  background: var(--ouro);
+  color: #111;
+}
+.deco-estrela.magenta {
+  background: var(--creme);
+  color: var(--terracota);
+}
+.deco-papel {
+  z-index: 1;
+  background: repeating-linear-gradient(
+    to bottom,
+    var(--papel) 0 11px,
+    var(--papel-linha) 11px 12px
+  );
+  clip-path: polygon(
+    0 4%,
+    6% 0,
+    14% 5%,
+    24% 0,
+    36% 4%,
+    48% 0,
+    60% 5%,
+    72% 1%,
+    86% 5%,
+    100% 0,
+    100% 96%,
+    92% 100%,
+    80% 95%,
+    68% 100%,
+    54% 96%,
+    40% 100%,
+    28% 95%,
+    14% 100%,
+    6% 96%,
+    0 100%
+  );
+}
+
+/* --- 1 foto --- */
+.colagem.n1 .p1 {
+  right: 8px;
+  top: 9%;
+  width: 72%;
+  transform: rotate(3deg);
+  z-index: 4;
+}
+.colagem.n1 .deco-estrela.amarela {
+  left: 70%;
+  top: 3%;
+  transform: rotate(12deg);
+}
+.colagem.n1 .deco-estrela.magenta {
+  left: 4%;
+  top: 72%;
+  width: 20%;
+  transform: rotate(-10deg);
+}
+.colagem.n1 .deco-papel {
+  left: 52%;
+  top: 80%;
+  width: 44%;
+  height: 14%;
+  transform: rotate(3deg);
+}
+
+/* --- 2 fotos --- */
+.colagem.n2 .p1 {
+  left: 5%;
+  top: 4%;
+  width: 72%;
+  transform: rotate(-3deg);
+  z-index: 2;
+}
+.colagem.n2 .p2 {
+  right: 8px;
+  top: 36%;
+  width: 62%;
+  transform: rotate(4deg);
+  z-index: 4;
+}
+.colagem.n2 .deco-estrela.amarela {
+  left: 72%;
+  top: 2%;
+  transform: rotate(12deg);
+}
+.colagem.n2 .deco-estrela.magenta {
+  left: 6%;
+  top: 55%;
+  width: 20%;
+  transform: rotate(-10deg);
+}
+.colagem.n2 .deco-papel {
+  left: 2%;
+  top: 80%;
+  width: 38%;
+  height: 16%;
+  transform: rotate(-4deg);
+}
+
+/* --- 3 fotos --- */
+.colagem.n3 .p1 {
+  left: 6%;
+  top: 4%;
+  width: 70%;
+  transform: rotate(-3deg);
+  z-index: 2;
+}
+.colagem.n3 .p2 {
+  right: 8px;
+  top: 28%;
+  width: 62%;
+  transform: rotate(4deg);
+  z-index: 4;
+}
+.colagem.n3 .p3 {
+  left: 6%;
+  top: 65%;
+  width: 62%;
+  transform: rotate(-2deg);
+  z-index: 3;
+}
+.colagem.n3 .deco-estrela.amarela {
+  left: 72%;
+  top: 2%;
+  transform: rotate(12deg);
+}
+.colagem.n3 .deco-estrela.magenta {
+  left: 9%;
+  top: 47%;
+  width: 20%;
+  transform: rotate(-10deg);
+}
+.colagem.n3 .deco-papel {
+  left: 54%;
+  top: 79%;
+  width: 42%;
+  height: 16%;
+  transform: rotate(3deg);
+}
+
+/* --- 4 fotos --- */
+.colagem.n4 .p1 {
+  left: 5%;
+  top: 3%;
+  width: 70%;
+  transform: rotate(-3deg);
+  z-index: 2;
+}
+.colagem.n4 .p2 {
+  right: 8px;
+  top: 26%;
+  width: 60%;
+  transform: rotate(4deg);
+  z-index: 4;
+}
+.colagem.n4 .p3 {
+  left: 5%;
+  top: 56%;
+  width: 56%;
+  transform: rotate(-2deg);
+  z-index: 3;
+}
+.colagem.n4 .p3 img {
+  aspect-ratio: 1 / 1;
+}
+.colagem.n4 .p4 {
+  right: 4px;
+  top: 76%;
+  width: 50%;
+  transform: rotate(3deg);
+  z-index: 5;
+}
+.colagem.n4 .deco-estrela.amarela {
+  left: 72%;
+  top: 1%;
+  transform: rotate(12deg);
+}
+.colagem.n4 .deco-estrela.magenta {
+  left: 72%;
+  top: 52%;
+  width: 20%;
+  transform: rotate(-10deg);
+}
+.colagem.n4 .deco-papel {
+  left: 60%;
+  top: 65%;
+  width: 36%;
+  height: 11%;
+  transform: rotate(4deg);
+}
+
+.aviso {
+  padding: 80px 30px;
+  text-align: center;
+}
+.aviso h1 {
+  font-family: "Anton", Impact, sans-serif;
+  font-weight: 400;
+  margin-bottom: 10px;
+  color: var(--titulo);
+}
+
+/* ---------- CELULAR (onde o QR code será lido) ---------- */
+@media (max-width: 720px) {
+  .topo {
+    grid-template-columns: 1fr;
+    gap: 0;
+    padding: 20px 22px 0;
+  }
+  .nome-bloco {
+    --pad-nome: 22px;
+    min-height: 0;
+  }
+  .foto,
+  .foto.recorte {
+    position: relative;
+    right: auto;
+    bottom: auto;
+    display: block;
+    margin: 20px auto -20px;
+    width: 85%;
+    max-width: 320px;
+    height: 380px;
+    transform: none;
+  }
+  .foto.recorte {
+    height: 400px;
+    margin-bottom: 0;
+  }
+
+  .base {
+    padding: 40px 22px 34px;
+  }
+  .base {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .base-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    order: 1;
+  }
+  .galeria,
+  .galeria.apos-recorte {
+    grid-column: 1;
+    grid-row: auto;
+    order: 2;
+    margin: 30px auto 0;
+    width: 100%;
+    max-width: 420px;
+  }
+  .anedota {
+    order: 3;
+  }
+  .pergunta {
+    order: 4;
+  }
+  .col-base {
+    padding: 0;
+    border: none;
+  }
+}
+
+/* ---------- Ficha ---------- */
+.dado {
+  font-size: 0.95rem;
+  margin-bottom: 8px;
+  line-height: 1.4;
+  color: var(--texto);
+}
+.dado strong {
+  display: block;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: var(--verde);
+}
+
+/* ---------- História completa (fundo claro: terracota + verde) ---------- */
+.historia {
+  background: var(--creme);
+  padding: 60px 34px 50px;
+}
+.historia > h2 {
+  font-size: 2.2rem;
+  margin: 0 0 18px;
+  color: var(--titulo);
+}
+
+.historia details {
+  background: #fff;
+  border: 2px solid var(--ambar);
+  border-radius: 12px;
+  margin-bottom: 12px;
+  overflow: hidden;
+}
+.historia summary {
+  cursor: pointer;
+  list-style: none;
+  padding: 14px 18px;
+  font-family: "Anton", Impact, sans-serif;
+  font-size: 1.15rem;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  color: var(--titulo);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+.historia summary::-webkit-details-marker {
+  display: none;
+}
+.historia summary::after {
+  content: "+";
+  font-size: 1.6rem;
+  line-height: 1;
+  color: var(--verde);
+}
+.historia details[open] summary::after {
+  content: "–";
+}
+.historia details[open] summary {
+  background: var(--suave);
+}
+
+.corpo {
+  padding: 14px 18px 20px;
+  color: var(--texto);
+  line-height: 1.75;
+  font-size: 0.98rem;
+}
+.corpo p {
+  margin-bottom: 12px;
+}
+.corpo ul {
+  margin: 0 0 12px 22px;
+}
+.corpo li {
+  margin-bottom: 6px;
+}
+.corpo h4 {
+  color: var(--verde);
+  font-family: "Anton", Impact, sans-serif;
+  font-weight: 400;
+  letter-spacing: 0.4px;
+  margin: 14px 0 6px;
+}
+.corpo blockquote {
+  border-left: 4px solid var(--terracota);
+  padding: 6px 16px;
+  margin: 14px 0;
+  font-family: "Playfair Display", Georgia, serif;
+  font-style: italic;
+  font-size: 1.1rem;
+  color: var(--verde);
+}
+
+/* frase final: creme sobre marrom, destaque em âmbar claro */
+.frase-final {
+  background: var(--escuro);
+  color: var(--creme);
+  border-radius: 14px;
+  padding: 22px;
+  margin-top: 22px;
+  font-family: "Playfair Display", Georgia, serif;
+  font-style: italic;
+  font-size: 1.2rem;
+  line-height: 1.5;
+}
+.frase-final strong {
+  font-weight: 700;
+  color: var(--ouro);
+}
+
+@media (max-width: 720px) {
+  .historia {
+    padding: 36px 16px 40px;
+  }
+}
+
+/* ---------- Fontes no fim da página ---------- */
+.fontes-final {
+  /* cor de fundo da seção; os recortes dos ingressos e das camisas usam a mesma */
+  --fundo-fontes: var(--escuro);
+  background: var(--fundo-fontes);
+  color: var(--creme);
+  padding: 54px 34px 58px;
+}
+.fontes-final:empty {
+  display: none;
+}
+.fontes-final h2 {
+  color: var(--ouro);
+}
+.ff-topo {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin-bottom: 26px;
+}
+.ff-topo h2 {
+  margin: 0;
+  font-size: 2.2rem;
+}
+.ff-sub {
+  margin-top: 2px;
+  font-size: 0.95rem;
+  opacity: 0.85;
+}
+.ff-selo {
+  flex: 0 0 auto;
+  width: 74px;
+  height: 74px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--ouro);
+  color: #111;
+  border: 3px solid #fff;
+  box-shadow: 0 3px 9px rgba(0, 0, 0, 0.45);
+  transform: rotate(-8deg);
+}
+.ff-selo svg {
+  display: block;
+  width: 62%;
+  aspect-ratio: 1 / 1;
+  height: auto;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  overflow: visible;
+}
+
+/* Cada fonte é um "ingresso" numerado, com picote */
+.ff-lista {
+  list-style: none;
+  display: grid;
+  gap: 12px;
+}
+.ff-ingresso {
+  position: relative;
+  display: flex;
+  align-items: stretch;
+  background: var(--creme);
+  color: var(--texto);
+  border-radius: 12px;
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+.ff-ingresso::before,
+.ff-ingresso::after {
+  content: "";
+  position: absolute;
+  left: 51px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--fundo-fontes);
+}
+.ff-ingresso::before {
+  top: -7px;
+}
+.ff-ingresso::after {
+  bottom: -7px;
+}
+.ff-num {
+  flex: 0 0 58px;
+  display: grid;
+  place-items: center;
+  font-family: "Anton", Impact, sans-serif;
+  font-size: 1.5rem;
+  color: var(--terracota);
+  background: var(--suave);
+  border-radius: 12px 0 0 12px;
+  border-right: 2px dashed var(--ambar);
+}
+.ff-texto {
+  flex: 1;
+  align-self: center;
+  padding: 14px 18px;
+  min-width: 0;
+}
+.ff-texto a {
+  color: var(--terracota);
+  text-decoration: underline;
+  word-break: break-word;
+}
+.ff-texto a::after {
+  content: " ↗";
+  font-weight: 700;
+}
+.ff-texto a:hover {
+  color: var(--marrom);
+  text-decoration-thickness: 2px;
+}
+
+/* "Elas também fazem história": cartões em forma de camisa */
+.ff-titulo2 {
+  margin: 42px 0 16px;
+  font-family: "Anton", Impact, sans-serif;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-size: 1.5rem;
+  color: var(--ouro);
+}
+.ff-grade {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 16px;
+}
+.ff-camisa {
+  position: relative;
+  background: var(--ambar);
+  color: var(--noite);
+  border-radius: 20px 20px 12px 12px;
+  padding: 28px 16px 16px;
+}
+.ff-camisa::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 40px;
+  height: 20px;
+  transform: translateX(-50%);
+  background: var(--fundo-fontes);
+  border-radius: 0 0 40px 40px;
+}
+.ff-camisa strong {
+  display: block;
+  margin-bottom: 6px;
+  font-family: "Anton", Impact, sans-serif;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  font-size: 1.15rem;
+  line-height: 1.2;
+}
+.ff-camisa p {
+  font-size: 0.88rem;
+  line-height: 1.45;
+}
+
+@media (max-width: 720px) {
+  .fontes-final {
+    padding: 40px 22px 44px;
+  }
+  .ff-topo h2 {
+    font-size: 1.8rem;
+  }
+  .ff-selo {
+    width: 62px;
+    height: 62px;
+  }
+}
+
+/* ---------- Medalhas ---------- */
+.medalha {
+  flex: 0 0 auto;
+  width: 44px;
+  height: 48px;
+  display: inline-block;
+}
+.medalha svg {
+  width: 80%;
+  height: 100%;
+  display: block;
+}
+
+.marco.com-medalha {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+.marco-texto .linha {
+  margin-top: 0;
+}
+.marco-texto .sub {
+  margin-bottom: 0;
+}
+
+.quadro {
+  background: #fff;
+  border: 2px solid var(--ambar);
+  border-radius: 14px;
+  padding: 12px 14px;
+  margin-bottom: 18px;
+}
+.quadro-titulo {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  margin-bottom: 6px;
+  color: var(--verde);
+  font-weight: 700;
+}
+.quadro-linha {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+}
+.quadro-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.quadro-item .medalha {
+  width: 40px;
+  height: 44px;
+}
+.quadro-item strong {
+  font-family: "Anton", Impact, sans-serif;
+  font-weight: 400;
+  font-size: 1.9rem;
+  color: var(--titulo);
+}
